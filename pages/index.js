@@ -8,10 +8,10 @@ const Home = () => {
   return (
     <ItemProvider>
       <div className=" bg-[url('../public/static/images/backgrounds_login-background@1x.svg')] h-full w-[486px]  md:w-full lg:w-full xl:w-full 2xl:w-full sm:w-full  md:h-full lg:h-full xl:h-full 2xl:h-full  bg-center bg-cover">
-        <div className="flex justify-center">
+        <div className="flex justify-center h-[63rem] sm:h-screen md:h-screen lg:h-screen xl:h-screen 2xl:h-screen ">
           <div className="flex justify-center items-center text-center ">
             <div className="">
-              <div className="font-normal transition-all text-8xl mt-32 mb-4 p-2">
+              <div className="font-normal transition-all text-8xl -mt-64 mb-4 p-2">
                 <Image
                   src={logoImage}
                   alt="Picture of the Company"

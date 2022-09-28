@@ -9,9 +9,9 @@ const Main = () => {
   return (
     <main className="relative md:h-full lg:h-full xl:h-full 2xl:h-full 2xl:w-full border shadow-2xl">
       <div className="absolute z-0 w-0 left-[115px] -mt-2 border border-l-gray-[#979797] inset-20 "></div>
-      <button className="text-zinc-50 bg-blueNetwork mr-64 sm:mr-64 md:mr-64 2xl:mr-64 mt-10 py-1 px-10 rounded-2xl ">
+      <div className="text-zinc-50 w-[145px] h-[36px] bg-blueNetwork ml-10 sm:mr-64 md:mr-64 2xl:-mr-44 mt-9 py-1 px-[47px] rounded-2xl ">
         Network
-      </button>
+      </div>
       <CardSimple />
       <CardComplex />
       <button
