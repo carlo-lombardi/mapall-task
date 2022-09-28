@@ -104,8 +104,11 @@ function ItemProvider(props) {
     };
 
     return (
-      <div className="mt-4 py-2 rounded-xl bg-blueNetwork">
-        <button onClick={saveData}>Save</button>
+      <div
+        onClick={saveData}
+        className="text-white cursor-pointer mt-4 py-2 rounded-xl bg-blueNetwork"
+      >
+        <button>Save</button>
       </div>
     );
   };
@@ -117,13 +120,11 @@ function ItemProvider(props) {
       }
     };
     return (
-      <div>
-        <button
-          className="w-full py-2 mt-4 rounded-xl bg-blueNetwork"
-          onClick={saveChildData}
-        >
-          Save
-        </button>
+      <div
+        className="text-white w-full cursor-pointer py-2 mt-4 rounded-xl bg-blueNetwork"
+        onClick={saveChildData}
+      >
+        <button>Save</button>
       </div>
     );
   };

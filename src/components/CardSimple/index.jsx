@@ -6,14 +6,14 @@ const CardSimple = (e) => {
   const [newData, setNewData] = useState([]);
   const { listToDisplaySimple, deleteSimpleCell } = useContext(ItemContext);
 
-  // useEffect(() => {
-  //   const newDataStorage = JSON.parse(localStorage.getItem("simple"));
-  //   setNewData(newDataStorage);
-  // }, [listToDisplaySimple]);
+  useEffect(() => {
+    const newDataStorage = JSON.parse(localStorage.getItem("simple"));
+    setNewData(newDataStorage);
+  }, [listToDisplaySimple]);
 
   return (
     <>
-      {listToDisplaySimple?.map((e, key) => {
+      {newData?.map((e, key) => {
         return (
           <>
             <div

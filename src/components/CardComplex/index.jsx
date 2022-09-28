@@ -15,14 +15,14 @@ const CardComplex = (e) => {
     complexChildText,
   } = useContext(ItemContext);
 
-  // useEffect(() => {
-  //   const newDataStorage = JSON.parse(localStorage.getItem("complex"));
-  //   setNewData(newDataStorage);
-  // }, [listToDisplayComplex]);
+  useEffect(() => {
+    const newDataStorage = JSON.parse(localStorage.getItem("complex"));
+    setNewData(newDataStorage);
+  }, [listToDisplayComplex]);
 
   return (
     <>
-      {listToDisplayComplex?.map((e, key) => {
+      {newData?.map((e, key) => {
         return (
           <div
             key={key}
