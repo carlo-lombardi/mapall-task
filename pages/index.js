@@ -7,7 +7,7 @@ import { ItemProvider } from "../src/context";
 const Home = () => {
   return (
     <ItemProvider>
-      <div className=" bg-[url('../public/static/images/backgrounds_login-background@1x.svg')] h-full w-[486px]  md:w-full lg:w-full xl:w-full 2xl:w-full sm:w-full  md:h-full lg:h-full xl:h-full 2xl:h-full  bg-center bg-cover">
+      <div className=" bg-[url('../public/static/images/backgrounds_login-background@1x.svg')] h-full w-[486px] md:w-full lg:w-full xl:w-full 2xl:w-full sm:w-full  md:h-full lg:h-full xl:h-full 2xl:h-full  bg-center bg-cover">
         <div className="flex justify-center h-[63rem] sm:h-screen md:h-screen lg:h-screen xl:h-screen 2xl:h-screen ">
           <div className="flex justify-center items-center text-center ">
             <div className="">

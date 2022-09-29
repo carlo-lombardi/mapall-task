@@ -4,8 +4,7 @@ import { useSaveLocalStorage } from "./textValueLocalStorage";
 const ItemContext = React.createContext();
 
 function ItemProvider(props) {
-  const [listToDisplaySimple, setListToDisplaySimple] = useState([]);
-  const [listToDisplayComplex, setListToDisplayComplex] = useState([]);
+  const [listResultMerge, setListResultMerge] = useState([]);
   const [simpleValue, setSimpleValue] = useState("");
   const [complexValue, setComplexValue] = useState("");
   const [complexChildValue, setComplexChildValue] = useState("");
@@ -18,7 +17,6 @@ function ItemProvider(props) {
     const simpleTextValue = e.target;
     setSimpleValue(simpleTextValue.value);
   };
-
   const complexText = (e) => {
     const simpleComplexValue = e.target.value;
     setComplexValue(simpleComplexValue);
@@ -27,11 +25,9 @@ function ItemProvider(props) {
     const complexValue = e.target.value;
     setComplexChildValue(complexValue);
   };
-
   const openChildModal = () => {
     setShowChildModal(true);
   };
-
   const openModal = () => setShowModal(true);
   const closeModal = () => {
     setShowModal(false);
@@ -41,32 +37,43 @@ function ItemProvider(props) {
   const closeChildModal = () => {
     setShowChildModal(false);
   };
-
   const simpleOptions = () => {
     setSimple(true);
   };
   const complexOptions = () => {
     setComplex(true);
   };
-
-  const deleteSimpleCell = (e) => {
-    const findTheSimpleCellIndex = listToDisplaySimple.findIndex(
-      (index) => index.simple === simpleValue
+  const deleteSimpleCell = (text) => {
+    console.log(text);
+    const findTheSimpleCellIndex = listResultMerge.findIndex(
+      (index) => index.simpleTitle === text
     );
-    const newListSimple = [...listToDisplaySimple];
-    newListSimple.splice(findTheSimpleCellIndex);
-    setListToDisplaySimple(newListSimple);
-    localStorage.setItem("simple", JSON.stringify(newListSimple));
+    const newListSimple = [...listResultMerge];
+    newListSimple.splice(findTheSimpleCellIndex, 1);
+    setListResultMerge(newListSimple);
+    localStorage.setItem("SERVICES", JSON.stringify(newListSimple));
+  };
+  const deleteComplexCell = (text) => {
+    const findTheComplexCellIndex = listResultMerge.findIndex(
+      (index) => index.complex?.title === text
+    );
+    const newListComplex = [...listResultMerge];
+    newListComplex.splice(findTheComplexCellIndex, 1);
+    // newListComplex.filter((e) => e.complex?.title !== text);
+    console.log("findTheComplexCellIndex", findTheComplexCellIndex);
+    setListResultMerge(newListComplex);
+    localStorage.setItem("SERVICES", JSON.stringify(newListComplex));
   };
 
-  const deleteComplexCell = (e) => {
-    const findTheComplexCellIndex = listToDisplayComplex.findIndex(
-      (index) => index.complex === complexValue
+  const deleteChildComplex = (text, parent) => {
+    const result = [...listResultMerge];
+    const complexParent = result.find((e) => e.complex?.title === parent);
+    console.log(complexParent);
+    complexParent.complex.childValue = complexParent.complex.childValue.filter(
+      (y) => y !== text
     );
-    const newListComplex = [...listToDisplayComplex];
-    newListComplex.splice(findTheComplexCellIndex);
-    setListToDisplayComplex(newListComplex);
-    localStorage.setItem("complex", JSON.stringify(newListComplex));
+    setListResultMerge(result);
+    localStorage.setItem("SERVICES", JSON.stringify(result));
   };
 
   const onClickChildOutisdeClose = (e) => {
@@ -80,29 +87,28 @@ function ItemProvider(props) {
     const container = e.target;
     ("container" === container.id || "cancel-button" === container.id) &&
       closeModal();
+    setSimpleValue("");
+    setComplexValue("");
   };
 
   const OptionSelected = ({ typeOfData }) => {
-    const { finalListSimple, finalListComplex } = useSaveLocalStorage(
-      typeOfData,
-      []
-    );
+    const { listResultMerge } = useSaveLocalStorage(typeOfData, []);
     const saveData = () => {
+      const result = [...listResultMerge];
       if (typeOfData === "simple") {
-        finalListSimple.push({ simple: simpleValue });
-        setListToDisplaySimple(finalListSimple);
-        localStorage.setItem(typeOfData, JSON.stringify(finalListSimple));
+        result.push({ simpleTitle: simpleValue });
+        setListResultMerge(result);
       } else {
-        finalListComplex.push({ complex: [{ title: complexValue }] });
-
-        setListToDisplayComplex(finalListComplex);
-        localStorage.setItem(typeOfData, JSON.stringify(finalListComplex));
+        result.push({ complex: { title: complexValue, childValue: [] } });
+        setListResultMerge(result);
       }
+      localStorage.setItem("SERVICES", JSON.stringify(result));
       setShowModal(false);
       setSimple(false);
       setComplex(false);
+      setSimpleValue("");
+      setComplexValue("");
     };
-
     return (
       <div
         onClick={saveData}
@@ -112,13 +118,18 @@ function ItemProvider(props) {
       </div>
     );
   };
-  const OptionChildSelected = ({ typeOfData }) => {
-    const { finalListComplex } = useSaveLocalStorage(typeOfData, []);
+
+  const OptionChildSelected = () => {
     const saveChildData = (e) => {
-      if (typeOfData === "complex") {
-        finalListComplex.forEach((item) => {});
-      }
+      const result = [...listResultMerge];
+      const parent = result.find((e) => e.complex?.title === complexValue);
+      parent.complex.childValue.push(complexChildValue);
+      localStorage.setItem("SERVICES", JSON.stringify(result));
+      setListResultMerge(result);
+      setShowChildModal(false);
+      setComplexChildValue("");
     };
+
     return (
       <div
         className="text-white w-full cursor-pointer py-2 mt-4 rounded-xl bg-blueNetwork"
@@ -128,6 +139,7 @@ function ItemProvider(props) {
       </div>
     );
   };
+
   return (
     <ItemContext.Provider
       value={{
@@ -141,19 +153,20 @@ function ItemProvider(props) {
         setSimpleValue,
         simpleText,
         complexText,
-        setListToDisplaySimple,
         deleteSimpleCell,
         deleteComplexCell,
         openChildModal,
         complexChildText,
         OptionChildSelected,
+        deleteChildComplex,
+        setListResultMerge,
+        setComplexValue,
+        listResultMerge,
         complexChildValue,
         showChildModal,
         showModal,
         simple,
         complex,
-        listToDisplaySimple,
-        listToDisplayComplex,
         simpleValue,
         complexValue,
       }}
