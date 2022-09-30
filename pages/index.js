@@ -20,7 +20,6 @@ const Home = () => {
                     height={94}
                   />
                 </div>
-                {/*cambiar las fuentes*/}
                 <h1 className="font-exo2  h-[48px] w-[491px] text-[#313131] leading-[48px] text-[34.44px] tracking-normal transition-all text-4xl mb-4 p-2 text-center ">
                   MapAll Build details
                 </h1>

@@ -3,7 +3,6 @@ import { BiTrashAlt } from "react-icons/bi";
 import { ItemContext } from "../../context";
 
 const CardComplex = ({ cardComplex: e }) => {
-  const [newData, setNewData] = useState();
   const {
     deleteComplexCell,
     onClickChildOutisdeClose,
@@ -12,17 +11,9 @@ const CardComplex = ({ cardComplex: e }) => {
     OptionChildSelected,
     complexChildValue,
     complexChildText,
-    listResultMerge,
     deleteChildComplex,
     setComplexValue,
-    setListResultMerge,
   } = useContext(ItemContext);
-
-  // useEffect(() => {
-  //   const newDataStorage = [...listResultMerge?.filter((item) => item.complex)];
-  //   setNewData(newDataStorage);
-  // }, [listResultMerge]);
-
   return (
     <div className="relative ml-[150px] sm:ml-[148px] w-64 mt-8 md:w-72 lg:w-72 xl:w-72 2xl:w-72">
       <div className="absolute h-0 -ml-[70px] mt-20 z-0 w-0 text-[#9E9E9E] inset-0">

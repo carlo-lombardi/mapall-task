@@ -58,7 +58,6 @@ function ItemProvider(props) {
     );
     const newListComplex = [...listResultMerge];
     newListComplex.splice(findTheComplexCellIndex, 1);
-    // newListComplex.filter((e) => e.complex?.title !== text);
     setListResultMerge(newListComplex);
     localStorage.setItem("SERVICES", JSON.stringify(newListComplex));
   };
