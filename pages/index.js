@@ -24,7 +24,7 @@ const Home = () => {
                   MapAll Build details
                 </h1>
               </div>
-              <div className="max-h-[620px]">
+              <div className="max-h-[620px] overflow-auto">
                 <Main />
               </div>
             </div>
