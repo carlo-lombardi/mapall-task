@@ -44,7 +44,6 @@ function ItemProvider(props) {
     setComplex(true);
   };
   const deleteSimpleCell = (text) => {
-    console.log(text);
     const findTheSimpleCellIndex = listResultMerge.findIndex(
       (index) => index.simpleTitle === text
     );
@@ -60,7 +59,6 @@ function ItemProvider(props) {
     const newListComplex = [...listResultMerge];
     newListComplex.splice(findTheComplexCellIndex, 1);
     // newListComplex.filter((e) => e.complex?.title !== text);
-    console.log("findTheComplexCellIndex", findTheComplexCellIndex);
     setListResultMerge(newListComplex);
     localStorage.setItem("SERVICES", JSON.stringify(newListComplex));
   };
@@ -68,7 +66,6 @@ function ItemProvider(props) {
   const deleteChildComplex = (text, parent) => {
     const result = [...listResultMerge];
     const complexParent = result.find((e) => e.complex?.title === parent);
-    console.log(complexParent);
     complexParent.complex.childValue = complexParent.complex.childValue.filter(
       (y) => y !== text
     );

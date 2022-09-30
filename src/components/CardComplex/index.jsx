@@ -3,7 +3,6 @@ import { BiTrashAlt } from "react-icons/bi";
 import { ItemContext } from "../../context";
 
 const CardComplex = ({ cardComplex: e }) => {
-  console.log(e);
   const [newData, setNewData] = useState();
   const {
     deleteComplexCell,

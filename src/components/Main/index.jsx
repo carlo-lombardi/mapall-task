@@ -9,7 +9,6 @@ const Main = () => {
     useContext(ItemContext);
   useEffect(() => {
     const newDataStorage = JSON.parse(localStorage.getItem("SERVICES"));
-    console.log(newDataStorage);
     if (newDataStorage?.length) {
       setListResultMerge(newDataStorage);
     }
